@@ -1,0 +1,26 @@
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo10-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+  db:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo10-db-data:/var/lib/postgresql/data/pgdata
+volumes:
+  odoo10-web-data:
+  odoo10-db-data:

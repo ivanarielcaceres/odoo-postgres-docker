@@ -1,0 +1,5 @@
+# exclude everything
+addons/*
+
+# exception to the rule
+!addons/requirements.txt 
