@@ -2,13 +2,13 @@ version: '2'
 services:
   nginx:
     image: nginx
-    links:
-      - "web:odoo"
+    depends_on:
+      - odoo
     ports:
       - "80:80"
     volumes:
       - ./config/nginx.conf:/etc/nginx/nginx.conf
-  web:
+  odoo:
     build:
       context: .
       dockerfile: Dockerfile
