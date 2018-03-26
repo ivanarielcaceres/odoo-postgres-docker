@@ -2,8 +2,8 @@ version: '2'
 services:
   nginx:
     image: nginx
-    depends_on:
-      - web
+    links:
+      - "web:odoo"
     ports:
       - "80:80"
     volumes:
@@ -14,8 +14,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - db
-    ports:
-      - "8069:8069"
     volumes:
       - odoo10-web-data:/var/lib/odoo
       - ./config:/etc/odoo
