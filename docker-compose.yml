@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   nginx:
     image: nginx
@@ -9,13 +9,11 @@ services:
     volumes:
       - ./config/nginx.conf:/etc/nginx/nginx.conf
   odoo:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: odoo:latest
     depends_on:
       - db
     volumes:
-      - odoo10-web-data:/var/lib/odoo
+      - odoo11-web-data:/var/lib/odoo
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
   db:
@@ -25,7 +23,7 @@ services:
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - odoo10-db-data:/var/lib/postgresql/data/pgdata
+      - odoo11-db-data:/var/lib/postgresql/data/pgdata
 volumes:
-  odoo10-web-data:
-  odoo10-db-data:
+  odoo11-web-data:
+  odoo11-db-data:
